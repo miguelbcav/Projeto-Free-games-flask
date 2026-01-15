@@ -76,4 +76,5 @@ def game(game_id):
     return "Jogo não encontrado", 404
 
 if __name__ == "__main__":
-    app.run(debug=True,port=9212)
+    app.run()
+
