@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Grátis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Jogos Grátis</h1>
+    </header>
+
+    <div class="games">
+        {% for game in games %}
+        <a href="{{ url_for('game', game_id=game.id) }}" class="card">
+            <img src="{{ game.thumbnail }}" alt="{{ game.title }}">
+            <h3>{{ game.title }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

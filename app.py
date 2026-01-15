@@ -1,0 +1,55 @@
+from flask import Flask,render_template
+import requests
+
+app = Flask(__name__)
+
+URL = "https://www.freetogame.com/api/games"
+
+def get_games():
+    resp = requests.get(URL)
+    resp.raise_for_status()
+
+    return resp.json()
+
+@app.route("/")
+def home():
+    data = get_games()
+
+    games = [
+        {   
+            "id": game['id'],
+            "title": game['title'],
+            "thumbnail": game['thumbnail'],
+        }
+        for game in data
+    ]
+
+    return render_template("index.html", games=games)
+
+@app.route("/game/<int:game_id>")
+def game(game_id):
+    from googletrans import Translator
+    translator = Translator()
+
+    data = get_games()
+
+    for game in data:
+        if game['id'] == game_id:
+            result = translator.translate(f"{game['short_description']}", dest="pt")
+            game_data = {
+                "id": game['id'],
+                "title": game['title'],
+                "thumbnail": game['thumbnail'],
+                "short_description": result.text,
+                "game_url": game['game_url'],
+                "genre": game['genre'],
+                "platform": game['platform'],
+                "developer": game['developer'],
+                "release_date": game['release_date']
+            }
+
+            return render_template("game.html", game=game_data)
+    return "Jogo não encontrado", 404
+
+if __name__ == "__main__":
+    app.run(debug=True,port=9212)

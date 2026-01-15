@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #272b30;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+/* GRID DE JOGOS */
+.games {
+    padding: 5vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.games a {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+/* IMAGEM */
+.games a img {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* HOVER */
+.games a:hover img {
+    transform: scale(1.1);
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}">
+    <link rel="shortcut icon" href="{{ game.thumbnail }}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="/" class="voltar"> ⬅ voltar</a>
+    </header>
+    <section class="col-1">
+        <img src="{{ game.thumbnail}}" alt="">
+        <button onclick="IrParaJogo('{{ game.game_url }}')">Jogar Agora</button>
+    </section>
+
+    <section class="col-2">
+        <h1>{{ game.title }}</h1>
+        <h4>Descrição:</h4>
+        <p><span>🛈</span> {{ game.short_description }}</p>
+        <h4>Genêro:</h4>
+        <p>⚄ {{ game.genre}}</p>
+        <h4>Plataforma:</h4>
+        <p>모 {{ game.platform }}</p>
+        <h4>Desenvolvedor:</h4>
+        <p>🛠 {{ game.developer }}</p>
+        <h4>Data de Lançamento:</h4>
+        <p>🗓 {{ game.release_date}}</p>
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
