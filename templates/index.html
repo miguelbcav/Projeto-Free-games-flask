@@ -9,6 +9,12 @@
 <body>
     <header>
         <h1>Jogos Grátis</h1>
+        <a href="">
+            Jogos Semanais
+        </a>
+        <form method="get">
+            <input name="search" placeholder="Pesquisar">
+        </form>
     </header>
 
     <div class="games">
@@ -18,6 +24,18 @@
             <h3>{{ game.title }}</h3>
         </a>
         {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="/?page={{ page - 1 }}">⬅ Anterior</a>
+        {% endif %}
+
+        <span>Página {{ page }} de {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+            <a href="/?page={{ page + 1 }}">Próxima ➡</a>
+        {% endif %}
     </div>
 </body>
 </html>

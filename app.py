@@ -1,9 +1,10 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 import requests
 
 app = Flask(__name__)
 
 URL = "https://www.freetogame.com/api/games"
+PER_PAGE = 28
 
 def get_games():
     resp = requests.get(URL)
@@ -13,7 +14,22 @@ def get_games():
 
 @app.route("/")
 def home():
+
+    search = request.args.get("search")
+    page = int(request.args.get("page", 1))  # página atual
     data = get_games()
+
+    if search:
+        search = search.lower()
+        data = [
+            game for game in data
+            if search in game["title"].lower()
+        ]
+
+    start = (page - 1) * PER_PAGE
+    end = start + PER_PAGE
+
+    games_page = data[start:end]
 
     games = [
         {   
@@ -21,10 +37,18 @@ def home():
             "title": game['title'],
             "thumbnail": game['thumbnail'],
         }
-        for game in data
+        for game in games_page
     ]
 
-    return render_template("index.html", games=games)
+    total_pages = (len(data) + PER_PAGE - 1) // PER_PAGE
+
+    return render_template(
+        "index.html",         
+        games=games,
+        page=page,
+        total_pages=total_pages,
+        search=search
+        )
 
 @app.route("/game/<int:game_id>")
 def game(game_id):

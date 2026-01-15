@@ -11,8 +11,21 @@ body {
 
 header {
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
     padding: 20px;
+    gap: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+header a:hover{
+    color: #49acff;
 }
 
 h1 {
@@ -31,6 +44,14 @@ h3 {
     gap: 20px;
 }
 
+form input{
+    height: 40px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px
+}
+
 /* CARD */
 .games a {
     display: block;
@@ -38,6 +59,7 @@ h3 {
     border-radius: 10px;
     text-decoration: none;
 }
+
 
 /* IMAGEM */
 .games a img {
@@ -49,4 +71,21 @@ h3 {
 /* HOVER */
 .games a:hover img {
     transform: scale(1.1);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.pagination a{
+    text-decoration: none;
+    color: white;
+}
+
+.pagination a:hover {
+    color: #49acff;
 }
