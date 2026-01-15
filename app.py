@@ -52,19 +52,22 @@ def home():
 
 @app.route("/game/<int:game_id>")
 def game(game_id):
-    from googletrans import Translator
-    translator = Translator()
+    from deep_translator import GoogleTranslator
 
     data = get_games()
 
     for game in data:
         if game['id'] == game_id:
-            result = translator.translate(f"{game['short_description']}", dest="pt")
+            translated = GoogleTranslator(
+                source="auto",
+                target="pt"
+            ).translate(game["short_description"])
+
             game_data = {
                 "id": game['id'],
                 "title": game['title'],
                 "thumbnail": game['thumbnail'],
-                "short_description": result.text,
+                "short_description": translated,
                 "game_url": game['game_url'],
                 "genre": game['genre'],
                 "platform": game['platform'],
@@ -73,6 +76,7 @@ def game(game_id):
             }
 
             return render_template("game.html", game=game_data)
+
     return "Jogo não encontrado", 404
 
 if __name__ == "__main__":
